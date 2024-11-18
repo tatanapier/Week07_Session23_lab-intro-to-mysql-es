@@ -1,0 +1,77 @@
+CREATE DATABASE CAR_SALES;
+
+USE DATABASE CAR_SALES;
+CREATE SCHEMA SALES;
+
+USE SCHEMA CAR_SALES.SALES;
+CREATE TABLE COCHES (                             
+    vin VARCHAR(100),                            -- Número de identificación del vehículo (único)
+    manufacturer VARCHAR(50),                    -- Fabricante del coche
+    model VARCHAR(50),                           -- Modelo del coche
+    year_ VARCHAR(50),                           -- Año del coche
+    color VARCHAR(20)                            -- Color del coche
+);
+
+CREATE TABLE CLIENTES (
+    customer_id INT,                             -- Identificador único del cliente
+    name VARCHAR(100),                           -- Nombre del cliente
+    phone_number VARCHAR(20),                    -- Número de teléfono
+    email VARCHAR(100),                          -- Correo electrónico
+    address VARCHAR(150),                        -- Dirección del cliente
+    city VARCHAR(50),                            -- Ciudad
+    state VARCHAR(50),                           -- Estado/Provincia
+    country VARCHAR(50),                         -- País
+    postal_code VARCHAR(20)                      -- Código postal
+);
+
+
+CREATE TABLE VENDEDORES (
+    salesperson_id INT,                          -- Identificador único del vendedor
+    name VARCHAR(100),                           -- Nombre del vendedor
+    store VARCHAR(50)                            -- Tienda donde trabaja el vendedor
+);
+
+
+CREATE TABLE FACTURAS (
+    invoice_id INT,                              -- Número de factura
+    invoice_date DATE,                           -- Fecha de la venta
+    vin VARCHAR(100),                            -- Identificador del coche vendido (FK)
+    customer_id INT,                             -- Identificador del cliente (FK)
+    salesperson_id INT                           -- Identificador del vendedor (FK),
+);
+
+
+INSERT INTO COCHES (vin, manufacturer, model, year_, color)
+VALUES 
+('3K096I98581DHSNUP', 'Volkswagen', 'Tiguan', 2019, 'Azul'),
+('ZM8G7BEUQZ97IH46V', 'Peugeot', 'Rifter', 2019, 'Rojo'),
+('RKXVNNIHLVVZOUB4M', 'Ford', 'Fusion', 2018, 'Blanco'),
+('HKNDGS7CU31E9Z7JW', 'Toyota', 'RAV4', 2018, 'Plata'),
+('DAM41UDN3CHU2WVF6', 'Volvo', 'V60', 2019, 'Gris'),
+('DAM41UDN3CHU2WVF6', 'Volvo', 'V60 Cross Country', 2019, 'Gris');
+
+
+INSERT INTO CLIENTES (customer_id, name, phone_number, email, address, city, state, country, postal_code)
+VALUES 
+(10001, 'Pablo Picasso', '+34 636 17 63 82', '-', 'Paseo de la Chopera, 14', 'Madrid', 'Madrid', 'España', '28045'),
+(10002, 'Abraham Lincoln', '+1 305 907 7086', '-', '120 SW 8th St', 'Miami', 'Florida', 'Estados Unidos', '33130'),
+(10003, 'Napoléon Bonaparte', '+33 1 79 75 40 00', '-', '40 Rue du Colisée', 'París', 'Île-de-France', 'Francia', '75008');
+
+
+INSERT INTO VENDEDORES (salesperson_id, name, store) 
+VALUES 
+(00001, 'Petey Cruiser', 'Madrid'), 
+(00002,'Anna Sthesia', 'Barcelona'),
+(00003,'Paul Molive', 'Berlín'),
+(00004,'Gail Forcewind', 'París'),
+(00005,'Paige Turner', 'Mimia'),
+(00006,'Bob Frapples', 'Ciudad de México'),
+(00007,'Walter Melon', 'Ámsterdam'),
+(00008,'Shonda Leer', 'São Paulo');
+
+
+INSERT INTO FACTURAS (invoice_id, invoice_date, vin, customer_id, salesperson_id) 
+VALUES 
+(852399038, '2018-08-22', 0, 1, 3), 
+(731166526, '2018-12-31', 3, 0, 5),
+(271135104, '2019-01-22', 2, 2, 7);
